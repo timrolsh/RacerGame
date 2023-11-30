@@ -7,5 +7,5 @@ A racing game that utilizes proper design patterns for the Software Engineering 
 This project was created in Unity version 2022.3.14f1 LTS. However, it is version agnostic and should work with any version of Unity.
 
 ## Contributors
-Ethan, Rishabh, and Tim
+Ethan Modi, Rishabh Singh, and Tim Rolshud
 
