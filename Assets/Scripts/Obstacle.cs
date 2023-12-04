@@ -31,7 +31,9 @@ public class Obstacle : MonoBehaviour
 
     private void HandleDeath()
     {
-        // Handle death logic here
+        ScoreManager.Instance.StopScore();
+        GameObject.Find("Car").GetComponent<Car>().isActive = false;
+
     }
 
     void OnDestroy()

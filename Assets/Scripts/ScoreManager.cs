@@ -12,6 +12,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get { return _instance; } }
     private int _score = 0;
     private int _highScore = 0;
+    private Coroutine coroutine;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -58,13 +59,13 @@ public class ScoreManager : MonoBehaviour
 
     public void StartScore()
     {
-        StartCoroutine(UpdateScoreRoutine());
+        coroutine = StartCoroutine(UpdateScoreRoutine());
 
     }
 
     public void StopScore()
     {
-        StopCoroutine(UpdateScoreRoutine());
+        StopCoroutine(coroutine);
         if (_score > _highScore)
         {
             PlayerPrefs.SetInt("HighScore", _score);
