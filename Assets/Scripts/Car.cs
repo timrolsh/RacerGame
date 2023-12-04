@@ -38,6 +38,7 @@ public class Car : MonoBehaviour
         if (gameObject.transform.position.z > 12)
         {
             Forward(platform);
+            
         }
         Forward(mainCamera);
 
