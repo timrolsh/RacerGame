@@ -1,25 +1,25 @@
 using UnityEngine;
 
-public class Main : MonoBehaviour
+public class Car : MonoBehaviour
 {
     public GameObject platform;
     public GameObject mainCamera;
     readonly float carSpeed = 10f;
 
     // move a GameObject forward by the car's speed
-    void Forward(GameObject gameObject)
+    void Forward(GameObject go)
     {
-        gameObject.transform.position += new Vector3(0, 0, carSpeed * Time.deltaTime);
+        go.transform.position += new Vector3(0, 0, carSpeed * Time.deltaTime);
     }
 
-    void Left(GameObject gameObject)
+    void Left(GameObject go)
     {
-        gameObject.transform.position += new Vector3(-carSpeed * Time.deltaTime, 0, 0);
+        go.transform.position += new Vector3(-carSpeed * Time.deltaTime, 0, 0);
     }
 
-    void Right(GameObject gameObject)
+    void Right(GameObject go)
     {
-        gameObject.transform.position += new Vector3(carSpeed * Time.deltaTime, 0, 0);
+        go.transform.position += new Vector3(carSpeed * Time.deltaTime, 0, 0);
     }
 
     // Update is called once per frame
