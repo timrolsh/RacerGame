@@ -4,7 +4,7 @@ using UnityEngine;
 public class ObstacleAsset : ScriptableObject
 {
     public ObstacleType obstacleType;
-
+    public ObstacleLocation obstacleLocation;
     public delegate void ObstacleAction();
     public event ObstacleAction OnScore;
     public event ObstacleAction OnDeath;
