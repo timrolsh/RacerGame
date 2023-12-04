@@ -11,7 +11,8 @@ public class ScoreManager : MonoBehaviour
     private static ScoreManager _instance;
     public static ScoreManager Instance { get { return _instance; } }
     private int _score = 0;
-    private int _highScore = 0;
+    // Load the high score from PlayerPrefs or initialize it to 0 if it doesn't exist
+    private int _highScore;
     private Coroutine coroutine;
     private void Awake()
     {
@@ -24,10 +25,9 @@ public class ScoreManager : MonoBehaviour
         else
         {
             _instance = this;
-            // Load the high score from PlayerPrefs or initialize it to 0 if it doesn't exist
-            _highScore = PlayerPrefs.GetInt("HighScore", 0);
-
         }
+        _highScore = PlayerPrefs.GetInt("HighScore", 0);
+        UpdateHighScoreText();
     }
 
     private IEnumerator UpdateScoreRoutine()
@@ -68,8 +68,9 @@ public class ScoreManager : MonoBehaviour
         StopCoroutine(coroutine);
         if (_score > _highScore)
         {
-            PlayerPrefs.SetInt("HighScore", _score);
+            _highScore = _score;
         }
+        PlayerPrefs.SetInt("HighScore", _highScore);
         _score = 0;
         UpdateScoreText();
     }
