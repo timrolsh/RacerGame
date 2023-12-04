@@ -7,6 +7,7 @@ A Singleton used to manage the score of the player.
 public class ScoreManager : MonoBehaviour
 {
     public Text scoreText;
+    public Text highScoreText;
     private static ScoreManager _instance;
     public static ScoreManager Instance { get { return _instance; } }
     private int _score = 0;
@@ -40,8 +41,19 @@ public class ScoreManager : MonoBehaviour
             if (_score > _highScore)
             {
                 _highScore = _score;
+                UpdateHighScoreText();
             }
         }
+    }
+
+    private void UpdateScoreText()
+    {
+        scoreText.text = "Score: " + _score.ToString();
+    }
+
+    private void UpdateHighScoreText()
+    {
+        highScoreText.text = "High Score: " + _highScore.ToString();
     }
 
     public void StartScore()
@@ -59,14 +71,5 @@ public class ScoreManager : MonoBehaviour
         }
         _score = 0;
         UpdateScoreText();
-
     }
-
-    private void UpdateScoreText()
-    {
-        scoreText.text = "Score: " + _score.ToString();
-    }
-
-
-
 }
