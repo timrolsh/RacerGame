@@ -72,4 +72,16 @@ public class ScoreManager : MonoBehaviour
         _score = 0;
         UpdateScoreText();
     }
+
+    public void ScoreBoost()
+    {
+        _score += 10;
+        UpdateScoreText();
+        if (_score > _highScore)
+        {
+            _highScore = _score;
+            UpdateHighScoreText();
+        }
+    }
+
 }

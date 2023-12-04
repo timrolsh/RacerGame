@@ -3,25 +3,42 @@ public class Obstacle : MonoBehaviour
 {
     public ObstacleAsset obstacleAsset;
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        Debug.Log("Cone hit car");
+        if (other.gameObject.name.Equals("Car"))
         {
-            // You can check the Obstacle type and call the respective delegate
-            switch (obstacleAsset.obstacleType)
+            if (obstacleAsset.obstacleType == ObstacleType.Cone || obstacleAsset.obstacleType == ObstacleType.BigCone)
             {
-                case ObstacleType.Cone:
-                case ObstacleType.BigCone:
-                    // Assuming these types increase score
-                    obstacleAsset.TriggerScore();
-                    break;
-                case ObstacleType.Barrier:
-                case ObstacleType.PyramidBarrier:
-                    // Assuming these types cause death
-                    obstacleAsset.TriggerDeath();
-                    break;
-                    // Add other cases as needed
+                obstacleAsset.TriggerScore();
+            }
+            else
+            {
+                obstacleAsset.TriggerDeath();
             }
         }
+    }
+
+    void Start()
+    {
+        obstacleAsset.OnScore += HandleScore;
+        obstacleAsset.OnDeath += HandleDeath;
+    }
+
+    private void HandleScore()
+    {
+        ScoreManager.Instance.ScoreBoost();
+    }
+
+    private void HandleDeath()
+    {
+        // Handle death logic here
+    }
+
+    void OnDestroy()
+    {
+        // Unsubscribe to prevent memory leaks
+        obstacleAsset.OnScore -= HandleScore;
+        obstacleAsset.OnDeath -= HandleDeath;
     }
 }
