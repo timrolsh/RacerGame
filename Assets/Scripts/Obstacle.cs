@@ -5,7 +5,6 @@ public class Obstacle : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Cone hit car");
         if (other.gameObject.name.Equals("Car"))
         {
             if (obstacleAsset.obstacleType == ObstacleType.Cone || obstacleAsset.obstacleType == ObstacleType.BigCone)
