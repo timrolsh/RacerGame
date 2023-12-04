@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
-    public float score = 0;
+    private ScoreManager _scoreManager = ScoreManager.Instance;
     public GameObject platform;
     public GameObject mainCamera;
+
     readonly float carSpeed = 10f;
 
     // move a GameObject forward by the car's speed
@@ -23,6 +24,12 @@ public class Car : MonoBehaviour
         go.transform.position += new Vector3(carSpeed * Time.deltaTime, 0, 0);
     }
 
+    void Start()
+    {
+        _scoreManager = ScoreManager.Instance;
+        _scoreManager.StartScore();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -33,7 +40,6 @@ public class Car : MonoBehaviour
             Forward(platform);
         }
         Forward(mainCamera);
-        ++score;
 
         // allow the car to strafe left and right based on users input
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
