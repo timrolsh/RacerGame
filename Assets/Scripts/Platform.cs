@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
+    public GameObject car;
     public GameObject[] obstaclePrefabs;
     private readonly ObstacleType[] types = (ObstacleType[])System.Enum.GetValues(typeof(ObstacleType));
+    private float lastGeneratedZ = 13;
+    private int rowsGenerated = 0;
 
     // Method to shuffle an array
     private void ShuffleArray<T>(T[] array)
@@ -40,16 +43,24 @@ public class Platform : MonoBehaviour
         ShuffleArray(obstacleLine);
         return obstacleLine;
     }
+
+    private void generateNewRow()
+    {
+        ObstacleType[] obstacleLine = GenerateObstacleLine();
+        Instantiate(obstaclePrefabs[(int)obstacleLine[0]], new Vector3(-4, 0.1f, lastGeneratedZ + rowsGenerated), Quaternion.identity).transform.Rotate(0, 90, 0);
+        Instantiate(obstaclePrefabs[(int)obstacleLine[1]], new Vector3(0, 0.1f, lastGeneratedZ + rowsGenerated), Quaternion.identity).transform.Rotate(0, 90, 0);
+        Instantiate(obstaclePrefabs[(int)obstacleLine[2]], new Vector3(4, 0.1f, lastGeneratedZ + rowsGenerated), Quaternion.identity).transform.Rotate(0, 90, 0);
+        lastGeneratedZ += 20;
+        ++rowsGenerated;
+    }
     // Start is called before the first frame update
     void Start()
     {
         // randomly generate the initial platform, there should be at least one cone on every platform
-        for (int a = 0; a < 10; a++)
+        while (rowsGenerated < 10)
         {
-            ObstacleType[] obstacleLine = GenerateObstacleLine();
-            Instantiate(obstaclePrefabs[(int)obstacleLine[0]], new Vector3(-4, 0.1f, 13 + a * 20), Quaternion.identity).transform.Rotate(0, 90, 0);
-            Instantiate(obstaclePrefabs[(int)obstacleLine[1]], new Vector3(0, 0.1f, 13 + a * 20), Quaternion.identity).transform.Rotate(0, 90, 0);
-            Instantiate(obstaclePrefabs[(int)obstacleLine[2]], new Vector3(4, 0.1f, 13 + a * 20), Quaternion.identity).transform.Rotate(0, 90, 0);
+            generateNewRow();
+
         }
 
     }
@@ -57,6 +68,9 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (gameObject.transform.position.z + 50 > lastGeneratedZ)
+        {
+            generateNewRow();
+        }
     }
 }
