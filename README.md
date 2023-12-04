@@ -21,3 +21,7 @@ Ethan Modi, Rishabh Singh, and Tim Rolshud
 
 * Our game allows you to save your high score so that when you reopen it, the game still sees your high score!
 * Our game also has a cool space background as well
+
+## Tests
+
+We have tests written to ensure that the there will always be new obstacles ahead of us, that the car moves with the same speed as the platform, and that the car never lags behind he platform.
