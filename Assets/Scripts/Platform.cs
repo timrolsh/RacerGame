@@ -47,11 +47,9 @@ public class Platform : MonoBehaviour
         for (int a = 0; a < 10; a++)
         {
             ObstacleType[] obstacleLine = GenerateObstacleLine();
-            for (int i = 0; i < 3; i++)
-            {
-                // Instantiate(obstacleLine, spawnPosition, Quaternion.identity);
-                // obstacle.transform.parent = gameObject.transform;
-            }
+            Instantiate(obstaclePrefabs[(int)obstacleLine[0]], new Vector3(-4, 0.1f, 13 + a * 20), Quaternion.identity).transform.Rotate(0, 90, 0);
+            Instantiate(obstaclePrefabs[(int)obstacleLine[1]], new Vector3(0, 0.1f, 13 + a * 20), Quaternion.identity).transform.Rotate(0, 90, 0);
+            Instantiate(obstaclePrefabs[(int)obstacleLine[2]], new Vector3(4, 0.1f, 13 + a * 20), Quaternion.identity).transform.Rotate(0, 90, 0);
         }
 
     }
