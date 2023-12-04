@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
+    public float score = 0;
     public GameObject platform;
     public GameObject mainCamera;
     readonly float carSpeed = 10f;
@@ -32,6 +33,7 @@ public class Car : MonoBehaviour
             Forward(platform);
         }
         Forward(mainCamera);
+        ++score;
 
         // allow the car to strafe left and right based on users input
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
